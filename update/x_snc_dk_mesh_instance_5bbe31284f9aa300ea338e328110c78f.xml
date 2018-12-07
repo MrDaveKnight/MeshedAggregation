@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_snc_dk_mesh_instance">
+    <x_snc_dk_mesh_instance action="INSERT_OR_UPDATE">
+        <name>Texas</name>
+        <sys_class_name>x_snc_dk_mesh_instance</sys_class_name>
+        <sys_created_by>dave.knight</sys_created_by>
+        <sys_created_on>2018-12-07 13:28:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>5bbe31284f9aa300ea338e328110c78f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Texas</sys_name>
+        <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
+        <sys_update_name>x_snc_dk_mesh_instance_5bbe31284f9aa300ea338e328110c78f</sys_update_name>
+        <sys_updated_by>dave.knight</sys_updated_by>
+        <sys_updated_on>2018-12-07 13:28:47</sys_updated_on>
+        <url>https://dknigsc2.service-now.com</url>
+    </x_snc_dk_mesh_instance>
+</record_update>

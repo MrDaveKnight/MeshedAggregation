@@ -8,11 +8,33 @@
         <description/>
         <name>Utils</name>
         <script><![CDATA[var Utils = Class.create();
+
 Utils.prototype = {
 	initialize: function() {
 	},
 	
 	type: 'Utils'
+};
+
+Utils.getLocalInstance = function () {
+	
+	var localInstance = "https://" + gs.getProperty("instance_name") + ".service-now.com";
+	
+// 	var session = gs.getSession();
+// 	var localInstance = session.getClientData('MeshUtilsLocalInstance');
+	
+// 	if (!localInstance) {
+			
+// 		var gr = new GlideRecord("x_snc_dk_mesh_instance");
+// 		gr.query();
+// 		while (gr.next()) {
+// 			if (gr.url == "https://" + gs.getProperty("instance_name") + ".service-now.com") {
+// 				localInstance = gr.sys_id.toString();
+// 				session.putClientData('MeshUtilsLocalInstance', localInstance);	
+// 			}
+// 		}				
+// 	}	
+	return localInstance;
 };
 
 Utils.publishUsers = function () {
@@ -50,7 +72,7 @@ Utils.resyncUser = function (current, is_initialization) {
 		l.email = current.email;
 		l.user_id = current.sys_id;
 		l.name = current.name;
-		l.instance = gs.getProperty("instance_name");
+		l.instance_url = Utils.getLocalInstance();
 		l.domain_name = current.getDisplayValue("sys_domain");
 		l.insert();
 	}
@@ -60,7 +82,7 @@ Utils.resyncUser = function (current, is_initialization) {
         <sys_created_on>2018-12-06 14:50:03</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>607749d44f5e6300ea338e328110c701</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>Utils</sys_name>
         <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
         <sys_policy>read</sys_policy>
@@ -68,6 +90,6 @@ Utils.resyncUser = function (current, is_initialization) {
         <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
         <sys_update_name>sys_script_include_607749d44f5e6300ea338e328110c701</sys_update_name>
         <sys_updated_by>dave.knight</sys_updated_by>
-        <sys_updated_on>2018-12-07 00:12:00</sys_updated_on>
+        <sys_updated_on>2018-12-07 19:20:39</sys_updated_on>
     </sys_script_include>
 </record_update>

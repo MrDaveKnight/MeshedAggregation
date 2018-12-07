@@ -9,7 +9,7 @@
         <label>Local Instance</label>
         <order/>
         <roles/>
-        <script>gs.getProperty("instance_name");</script>
+        <script>Utils.getLocalInstance()</script>
         <script_reference_id/>
         <script_reference_table/>
         <sys_class_name>sys_filter_option_dynamic</sys_class_name>
@@ -17,7 +17,7 @@
         <sys_created_on>2018-12-06 22:16:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>b68ca61c4f52a300ea338e328110c7b5</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>Local Instance</sys_name>
         <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
         <sys_policy/>
@@ -25,7 +25,7 @@
         <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
         <sys_update_name>sys_filter_option_dynamic_b68ca61c4f52a300ea338e328110c7b5</sys_update_name>
         <sys_updated_by>dave.knight</sys_updated_by>
-        <sys_updated_on>2018-12-06 22:35:45</sys_updated_on>
+        <sys_updated_on>2018-12-07 13:46:27</sys_updated_on>
         <table>x_snc_dk_mesh_instance</table>
         <table_containing_filter/>
     </sys_filter_option_dynamic>
