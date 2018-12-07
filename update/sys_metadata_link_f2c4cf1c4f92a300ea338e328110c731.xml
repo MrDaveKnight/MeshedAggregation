@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>9e1526944f52a300ea338e328110c79c</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="idr_producer_set">
+    <idr_producer_set action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <description/>
+        <name>User-mesh</name>
+        <private_key/>
+        <producer_instance_id>bc148de12be5f8c0ecf7bb4f59da1580</producer_instance_id>
+        <producer_name/>
+        <public_key/>
+        <shared_key>y5wErKFpfnEwqczJn1yI/ZUVsRSC2dzj+4/YNmFxAYxZ/jJIifDT6csUc/KwNLgHHy8ILJ0iPmdxVZEf/3yLGcty+KWt+QPPxfAPzDOQfpo=</shared_key>
+        <sys_class_name>idr_producer_set</sys_class_name>
+        <sys_created_by>dave.knight</sys_created_by>
+        <sys_created_on>2018-12-06 21:37:44</sys_created_on>
+        <sys_id>9e1526944f52a300ea338e328110c79c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>dave.knight</sys_updated_by>
+        <sys_updated_on>2018-12-06 21:37:44</sys_updated_on>
+    </idr_producer_set>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>dave.knight</sys_created_by>
+        <sys_created_on>2018-12-06 23:55:43</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>f2c4cf1c4f92a300ea338e328110c731</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>User-mesh</sys_name>
+        <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
+        <sys_update_name>sys_metadata_link_f2c4cf1c4f92a300ea338e328110c731</sys_update_name>
+        <sys_updated_by>dave.knight</sys_updated_by>
+        <sys_updated_on>2018-12-06 23:55:43</sys_updated_on>
+        <tablename>idr_producer_set</tablename>
+    </sys_metadata_link>
+</record_update>

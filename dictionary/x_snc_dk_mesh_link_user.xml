@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="User Link" max_length="40" name="x_snc_dk_mesh_link_user" type="collection">
+        <element label="Domain name" max_length="40" name="domain_name" type="string"/>
+        <element label="Email" max_length="40" name="email" type="string"/>
+        <element label="Instance" max_length="32" name="instance" reference="x_snc_dk_mesh_instance" type="reference"/>
+        <element label="Name" max_length="40" name="name" type="string"/>
+        <element label="User id" max_length="40" name="user_id" type="string"/>
+        <index name="index">
+            <element name="instance"/>
+        </index>
+    </element>
+</database>
