@@ -2,18 +2,18 @@
     <sys_ui_list parent="" relationship="" sys_domain="global" table="x_snc_dk_mesh_link" version="2" view="">
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>url</element>
-            <list_id display_value="x_snc_dk_mesh_link" element="NULL" name="x_snc_dk_mesh_link" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f1b60f9c4f92a300ea338e328110c7bf</list_id>
+            <element>sys_created_on</element>
+            <list_id display_value="x_snc_dk_mesh_link" element="NULL" name="x_snc_dk_mesh_link" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">a43bdbe84f9ea30056faac118110c7a4</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>0</position>
             <sum>false</sum>
             <sys_created_by>dave.knight</sys_created_by>
-            <sys_created_on>2018-12-07 00:04:07</sys_created_on>
-            <sys_id>b9b60f9c4f92a300ea338e328110c7bf</sys_id>
+            <sys_created_on>2018-12-07 20:12:05</sys_created_on>
+            <sys_id>f03bdbe84f9ea30056faac118110c7a5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>dave.knight</sys_updated_by>
-            <sys_updated_on>2018-12-07 00:04:07</sys_updated_on>
+            <sys_updated_on>2018-12-07 20:12:05</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
