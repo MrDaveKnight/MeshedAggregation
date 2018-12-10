@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Link" max_length="40" name="x_snc_dk_mesh_link" type="collection">
+    <element label="Task Link" max_length="40" name="x_snc_dk_mesh_link" type="collection">
+        <element label="Instance name" max_length="40" name="instance_name" type="string"/>
+        <element label="Instance url" max_length="1024" name="instance_url" type="url"/>
+        <element label="Local number" max_length="40" name="local_number" type="string"/>
+        <element label="Local sys id" max_length="40" name="local_sys_id" type="string"/>
+        <element label="Number" max_length="80" name="number" type="workflow"/>
         <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
         <index name="index">
             <element name="sys_class_name"/>

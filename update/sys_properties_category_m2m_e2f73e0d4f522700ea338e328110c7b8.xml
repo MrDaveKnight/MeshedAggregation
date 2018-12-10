@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="Meshed Aggregation">1f77f60d4f522700ea338e328110c710</category>
+        <order>100</order>
+        <property display_value="x_snc_dk_mesh.flagship" name="x_snc_dk_mesh.flagship">d01636c94f522700ea338e328110c725</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>dave.knight</sys_created_by>
+        <sys_created_on>2018-12-09 06:55:09</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>e2f73e0d4f522700ea338e328110c7b8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_dk_mesh.flagship.Meshed Aggregation</sys_name>
+        <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_e2f73e0d4f522700ea338e328110c7b8</sys_update_name>
+        <sys_updated_by>dave.knight</sys_updated_by>
+        <sys_updated_on>2018-12-09 06:55:09</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>

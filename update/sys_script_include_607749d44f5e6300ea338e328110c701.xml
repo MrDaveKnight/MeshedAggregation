@@ -10,79 +10,294 @@
         <script><![CDATA[var Utils = Class.create();
 
 Utils.prototype = {
-	initialize: function() {
-	},
-	
-	type: 'Utils'
+    initialize: function () {
+    },
+
+    type: 'Utils'
 };
 
 Utils.getLocalInstance = function () {
-	
-	var localInstance = "https://" + gs.getProperty("instance_name") + ".service-now.com";
-	
-// 	var session = gs.getSession();
-// 	var localInstance = session.getClientData('MeshUtilsLocalInstance');
-	
-// 	if (!localInstance) {
-			
-// 		var gr = new GlideRecord("x_snc_dk_mesh_instance");
-// 		gr.query();
-// 		while (gr.next()) {
-// 			if (gr.url == "https://" + gs.getProperty("instance_name") + ".service-now.com") {
-// 				localInstance = gr.sys_id.toString();
-// 				session.putClientData('MeshUtilsLocalInstance', localInstance);	
-// 			}
-// 		}				
-// 	}	
-	return localInstance;
+
+    var localInstance = "https://" + gs.getProperty("instance_name") + ".service-now.com";
+    // 	var session = gs.getSession();
+    // 	var localInstance = session.getClientData('MeshUtilsLocalInstance');
+
+    // 	if (!localInstance) {
+
+    // 		var gr = new GlideRecord("x_snc_dk_mesh_instance");
+    // 		gr.query();
+    // 		while (gr.next()) {
+    // 			if (gr.url == "https://" + gs.getProperty("instance_name") + ".service-now.com") {
+    // 				localInstance = gr.sys_id.toString();
+    // 				session.putClientData('MeshUtilsLocalInstance', localInstance);	
+    // 			}
+    // 		}				
+    // 	}			
+
+    return localInstance;
 };
 
 Utils.publishUsers = function () {
-	
-	gs.info("Publishing users out to the fleet.");
-	
-	try {
-		var gr = new GlideRecord("sys_user");
-		gr.addQuery("active", true);
-		gr.query();
-		while (gr.next()) {
-			this.resyncUser(gr, true);
-		}
-		gs.info("Publish complete.");
-	}
-	catch (e) {
-		gs.error("Utils.publishUsers failed!");
-	}
+
+    gs.info("Publishing users out to the fleet.");
+
+    try {
+        var gr = new GlideRecord("sys_user");
+        gr.addQuery("active", true);
+        gr.query();
+        while (gr.next()) {
+            this.resyncUser(gr, true);
+        }
+        gs.info("Publish complete.");
+    }
+    catch (e) {
+        gs.error("Utils.publishUsers failed!");
+    }
+};
+
+Utils.publishTasks = function () {
+
+    gs.info("Starting task mesh configuration.");
+    gs.info("Configuring local system.");
+
+    try {
+        var gr = new GlideRecord("x_snc_dk_mesh_table");
+        //gr.addQuery("active", true);
+        gr.query();
+        while (gr.next()) {
+            gs.info(gr.getDisplayValue("local_table") + " Link table is ready.");
+            gs.info(gr.getDisplayValue("local_table") + " Business Rule is ready.");
+            // Utils.manageTaskLinkTable(gr);
+        }
+        gs.info("Local config complete.");
+    }
+    catch (e) {
+        gs.error("Local config failed, aborting!");
+        return;
+    }
+
+    try {
+        var instance = new GlideRecord("x_snc_dk_mesh_instance");
+        //instance.addQuery("active", true);
+        instance.query();
+        while (instance.next()) {
+            if (instance.url == "https://" + gs.getProperty("instance_name") + ".service-now.com") {
+                continue;
+            }
+            gs.info("Pushing configuring to " + instance.name + ", " + instance.url);
+            // REST call
+        }
+    }
+    catch (e) {
+        gs.error("Remote config failed, aborting!");
+        return;
+    }
+
+    gs.info("Initializing mesh replication.");
+
+    try {
+        var inst = new GlideRecord("x_snc_dk_mesh_instance");
+        //inst.addQuery("active", true);
+        inst.query();
+        while (inst.next()) {
+            if (inst.url == "https://" + gs.getProperty("instance_name") + ".service-now.com") {
+                gs.info("Initializing local config on " + inst.name + ", " + inst.url);
+                // Script Include call
+            }
+            else {
+                gs.info("Initializing remote config on " + inst.name + ", " + inst.url);
+                // REST call
+            }
+        }
+    }
+    catch (e) {
+        gs.error("Remote config failed, aborting!");
+        return;
+    }
 };
 
 Utils.resyncUser = function (current, is_initialization) {
-	
-	var l = new GlideRecord("x_snc_dk_mesh_link_user");
-	if (l.get("user_id", current.sys_id)) {
-		l.email = current.email;
-		l.name = current.name;
-		l.domain_name = current.getDisplayValue("sys_domain");
-		l.update();
-	}
-	else {
-		if (!is_initialization) {
-			gs.error("Link record was not initialized!");
-		}
-		l.initialize();
-		l.email = current.email;
-		l.user_id = current.sys_id;
-		l.name = current.name;
-		l.instance_url = Utils.getLocalInstance();
-		l.domain_name = current.getDisplayValue("sys_domain");
-		l.insert();
-	}
+
+    var l = new GlideRecord("x_snc_dk_mesh_link_user");
+    if (l.get("user_id", current.sys_id)) {
+        l.email = current.email;
+        l.name = current.name;
+        l.domain_name = current.getDisplayValue("sys_domain");
+        l.update();
+    }
+    else {
+        if (!is_initialization) {
+            gs.error("Link record was not initialized!");
+        }
+        l.initialize();
+        l.email = current.email;
+        l.user_id = current.sys_id;
+        l.name = current.name;
+        l.instance_url = Utils.getLocalInstance();
+        l.domain_name = current.getDisplayValue("sys_domain");
+        l.insert();
+    }
+};
+
+Utils.manageTaskLinkTable = function (link_definition) {
+    // This will handle new and updated link definitions.
+    // link_definition is a x_snc_dk_mesh_table.
+    // It will create or update the associated table, identified
+    // in the link_table field.
+    // The fields are defined by the link_definition.replicated_fields list
+
+    //
+    // Look for the link table
+    //
+
+    // TODO: look for possible name truncation due to string length.
+    // Convention: link table name is "ml_<Local Table Name>"
+    var linkTableName = "ml_" + link_definition.local_table.toString();
+    var table = new GlideRecord('sys_db_object');
+    if (table.get("name", linkTableName)) {
+
+        //
+        // Link table exists. This is an update
+        //
+
+        // Find and record the current link fields to see what needs to be changed
+        var oldFields = {};
+        var linkField = new GlideRecord('sys_dictionary');
+        linkField.addEncodedQuery("name=" + link_definition.link_table.toString() +
+            "^internal_type!=collection^element!=sys_id");
+        // Note that only system field will be sys_id since it is extened from x_snc_dk_mesh_link
+        linkField.query();
+        while (linkField.next()) {
+            oldFields[linkField.element.toString()] = true;
+        }
+
+        // 
+        // Create new fields
+        //
+
+        var fieldArray = link_definition.replicated_fields.toString().split(",");
+        for (var x = 0; x < fieldArray.length; x++) {
+
+            if (!oldFields[fieldArray[x]]) {
+                // This configured field is not in the current table. Add it. 
+                Utils.createTaskLinkField(link_definition, linkTableName, fieldArray[x]);
+            }
+            else {
+                // This configured field is already in the current table. 
+                // Take note of it by setting its value to false, i.e. not old yet 
+                oldFields[fieldArray[x]] = false;
+            }
+
+        }
+
+        // 
+        // Delete old fields
+        //
+
+        for (var y in oldFields) {
+            if (oldFields[y]) {
+
+                // This field is no longer configured, so remove it from the table
+                Utils.deleteTaskLinkField(linkTableName, y);
+            }
+        }
+    }
+    else {
+
+        //
+        // Link table doesn't exist. This is an insert
+        //
+
+        //
+        // Create the link table
+        //
+
+        table.initialize();
+        table.name = linkTableName;
+        table.label = link_definition.getDisplayValue("local_table") + "Link";
+        table.super_class = "7a48b5814fdee300ea338e328110c716";  // x_snc_dk_mesh_table sys_id
+        table.sys_scope = "ea88eb6a4fc2e30056faac118110c7a2"; // Meshed Aggregation app
+        var tableSysID = table.insert();
+        if (tableSysID) {
+
+            //
+            // Create the link table fields
+            //
+
+            gs.info("Task Link table created: " + tableSysID);
+            var fields = link_definition.replicated_fields.toString().split(",");
+            for (var z = 0; z < fields.length; z++) {
+                Utils.createTaskLinkField(link_definition, linkTableName, fields[z]);
+            }
+        }
+        else {
+            gs.error("Task Link table creation failed!");
+        }
+    }
+};
+
+Utils.createTaskLinkField = function (link_definition, table_name, field_name) {
+    // All fields in the link will be strings or ints, i.e. display values,
+    // to decouple choices and references amoung the instances in the fleet.
+    // The name of the field in the link table will match the name of the field in the
+    // local table.
+
+    // Find the local field to determine the size of the link field
+    var localField = new GlideRecord('sys_dictionary');
+    localField.addQuery("name", link_definition.local_table);
+    localField.addQuery("element", field_name);
+    localField.query();
+    if (localField.next()) {
+
+        var max_length = localField.getValue("max_length"); // Should be an integer
+        if (max_length <= 0) {
+            gs.warn("Max length of this sys_dictionary element was zero: " + g.name + ":" + g.element);
+            max_length = 40;
+        }
+        if (max_length > 1000) {
+            // TODO truncate?
+            gs.warn("Sending a very large field over in the mesh link. Size of " +
+                g.name + ":" + g.element + " is " + max_length);
+        }
+
+        var linkField = new GlideRecord('sys_dictionary');
+        linkField.initialize();
+        linkField.name = table_name;
+        linkField.element = field_name;
+        linkField.column_label = localField.column_label.toString();
+        if (localField.internal_type == "integer") {
+            linkField.internal_type = "integer";
+        }
+        else {
+            linkField.internal_type = "string";
+            linkField.max_length = max_length;
+        }
+        if (!linkField.insert()) {
+            gs.error("Task Link table field creation failed!");
+        }
+    }
+    else {
+        gs.error("Could not find local table's field definition. Skipping " + field_name);
+    }
+};
+
+Utils.deleteTaskLinkField = function (table_name, field_name) {
+
+    var linkField = new GlideRecord('sys_dictionary');
+    linkField.addQuery("name", table_name);
+    linkField.addQuery("element", table_name);
+    linkField.query();
+    linkField.next();
+    if (!linkField.deleteRecord()) {
+        gs.error("Task link table field delete failed for " + table_name + ":" + field_name);
+    }
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>dave.knight</sys_created_by>
         <sys_created_on>2018-12-06 14:50:03</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>607749d44f5e6300ea338e328110c701</sys_id>
-        <sys_mod_count>13</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_name>Utils</sys_name>
         <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
         <sys_policy>read</sys_policy>
@@ -90,6 +305,6 @@ Utils.resyncUser = function (current, is_initialization) {
         <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
         <sys_update_name>sys_script_include_607749d44f5e6300ea338e328110c701</sys_update_name>
         <sys_updated_by>dave.knight</sys_updated_by>
-        <sys_updated_on>2018-12-07 19:20:39</sys_updated_on>
+        <sys_updated_on>2018-12-10 03:51:45</sys_updated_on>
     </sys_script_include>
 </record_update>

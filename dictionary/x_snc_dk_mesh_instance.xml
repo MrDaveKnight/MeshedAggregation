@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element attributes="update_synch=true" extends="sys_metadata" label="Instance" max_length="40" name="x_snc_dk_mesh_instance" type="collection">
+    <element label="Instance" max_length="40" name="x_snc_dk_mesh_instance" type="collection">
         <element label="Name" max_length="40" name="name" type="string"/>
+        <element choice="1" label="Region" max_length="40" name="region" type="choice">
+            <choice/>
+        </element>
         <element label="URL" max_length="1024" name="url" type="url"/>
     </element>
 </database>

@@ -22,7 +22,7 @@
         <delete_roles/>
         <dependent/>
         <dependent_on_field/>
-        <display>false</display>
+        <display>true</display>
         <dynamic_creation>false</dynamic_creation>
         <dynamic_creation_script/>
         <dynamic_default_value/>
@@ -33,7 +33,7 @@
         <function_definition/>
         <function_field>false</function_field>
         <internal_type display_value="">table_name</internal_type>
-        <mandatory>false</mandatory>
+        <mandatory>true</mandatory>
         <max_length>80</max_length>
         <name>x_snc_dk_mesh_table</name>
         <next_element/>
@@ -52,10 +52,10 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>dave.knight</sys_created_by>
-        <sys_created_on>2018-12-04 02:04:17</sys_created_on>
+        <sys_created_on>2018-12-09 02:19:52</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>4b0580634f426700ea338e328110c7be</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_id>d77879814fdee300ea338e328110c71b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Local table</sys_name>
         <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
         <sys_policy/>
@@ -63,7 +63,7 @@
         <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
         <sys_update_name>sys_dictionary_x_snc_dk_mesh_table_local_table</sys_update_name>
         <sys_updated_by>dave.knight</sys_updated_by>
-        <sys_updated_on>2018-12-04 03:17:37</sys_updated_on>
+        <sys_updated_on>2018-12-09 04:13:47</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
