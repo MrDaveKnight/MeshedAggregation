@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_snc_dk_mesh_link" label="Incident Link" max_length="40" name="x_snc_dk_mesh_incident_link" type="collection">
+        <element label="Assigned to" max_length="40" name="assigned_to" type="string"/>
+        <element label="Assignment group" max_length="40" name="assignment_group" type="string"/>
+        <element label="State" max_length="40" name="state" type="string"/>
+    </element>
+</database>

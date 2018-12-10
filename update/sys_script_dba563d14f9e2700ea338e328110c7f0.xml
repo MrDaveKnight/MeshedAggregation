@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>incident</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Resync incident mesh</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	
+	if (previous.state != current.state ||
+		previous.assigned_to != current.assigned_to ||
+		previous.assignment_group != current.assignment_group ||
+	   previous.short_description != current.short_description) {
+		
+		var l = new GlideRecord("x_snc_dk_mesh_incident_link");
+		if (l.get("local_sys_id", current.sys_id)) {
+			l.state = current.getDisplayValue("state");
+			l.assigned_to = current.getDisplayValue("assigned_to");
+			l.assignment_group = current.getDisplayValue("assignment_group");
+			l.short_description = current.getDisplayValue("short_description");
+			l.update();
+		}		
+	}
+	
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>dave.knight</sys_created_by>
+        <sys_created_on>2018-12-10 04:58:45</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>dba563d14f9e2700ea338e328110c7f0</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Resync incident mesh</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Meshed Aggregation" source="x_snc_dk_mesh">ea88eb6a4fc2e30056faac118110c7a2</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Meshed Aggregation">ea88eb6a4fc2e30056faac118110c7a2</sys_scope>
+        <sys_update_name>sys_script_dba563d14f9e2700ea338e328110c7f0</sys_update_name>
+        <sys_updated_by>dave.knight</sys_updated_by>
+        <sys_updated_on>2018-12-10 05:09:24</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=dba563d14f9e2700ea338e328110c7f0"/>
+</record_update>
